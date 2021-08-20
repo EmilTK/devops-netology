@@ -8,5 +8,7 @@
 7. Файлы override.tf.json
 8. Все файлы заканчивающиеся на _override.tf
 9. Все файлы заканчивающиеся на _override.tf.json
-11. Файлы .terraformrc
-12. Файлы terraform.rcВыполнение задания №3 урока 2.2
+10. Файлы .terraformrc
+11. Файлы terraform.rc
+
+<h2>Выполнение задания №3 урока 2.2</h2>
