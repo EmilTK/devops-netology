@@ -1,7 +1,19 @@
 ### Домашняя работа к занятию «3.1. Работа в терминале, лекция 1»
 
 5. ОЗУ 1024, CPU 2
-6.   Добавить ОЗУ: `config.memory`</br> Выделить ресурсы процессора: `config.cpus`
+6. 
+```
+Vagrant.configure("2") do |config|
+ 	config.vm.box = "bento/ubuntu-20.04"
+	config.vm.provider :virtualbox do |vb|
+		vb.name = "ubuntu_sysadm"
+		vb.memory = 2048 # Настройка ОЗУ ВМ
+		vb.cpus = 4      # Настройка CPU ВМ
+	end
+ end
+ ```
+    
+   
 7. Установить размер истории введенных команд равный 2000: `HISTSIZE=2000`</br> 
    `man bash` - 970 строка
 8. `ignoreboth` - команды начинающиеся с пробела (`ignorespace`) и команды соответствующие предыдущей(`ignoredumps`) 
@@ -14,9 +26,12 @@
 Если изменить данное ограничение, данную задачу можно решить: `touch test/file{1..100000}.txt`
     
 11. Вернет истину если `/tmp` существует и является каталогом. 
-12. `mkdir /tmp/new_path_directory`</br>
-    `ln -P /bin/bash /tmp/new_path_directory/bash`</br>
-    `export PATH="/tmp/new_path_directory:$PATH"`
+12. 
+```
+mkdir /tmp/new_path_directory
+ln -P /bin/bash /tmp/new_path_directory/bash
+export PATH="/tmp/new_path_directory:$PATH"
+```
 13. `at` - единоразово запускает программу в заданное время</br> 
     `batch` - единоразово запускает программу, когда средняя нагрузка
     опускается ниже 1.5     
