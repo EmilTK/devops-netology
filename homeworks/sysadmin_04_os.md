@@ -46,10 +46,10 @@
              └─1267 /usr/local/bin/node_exporter
       ```  
    * #### Проверка автозагрузки процесса ####
-   ```bash
-   vagrant@vagrant:~$ journalctl --boot=-1 | grep node_exporter.service
-   Sep 10 20:49:36 vagrant systemd[1]: node_exporter.service: Succeeded.
-   ```
+      ```bash
+      root@vagrant:~# journalctl --boot=-1 | grep node_exporter.service
+      Sep 10 20:49:36 vagrant systemd[1]: node_exporter.service: Succeeded.
+      ```
 1. Ознакомьтесь с опциями node_exporter и выводом `/metrics` по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
    * `node_cpu_seconds_total{cpu="*",mode="user"}`
    * `node_cpu_seconds_total{cpu="*",mode="system"}`
