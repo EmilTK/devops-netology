@@ -47,8 +47,9 @@
       ```  
    * #### Проверка автозагрузки процесса ####
       ```bash
-      root@vagrant:~# journalctl --boot=-1 | grep node_exporter.service
-      Sep 10 20:49:36 vagrant systemd[1]: node_exporter.service: Succeeded.
+      root@vagrant:~# journalctl -u node_exporter.service --since today
+      -- Logs begin at Thu 2021-09-02 19:53:40 MSK, end at Sat 2021-09-11 15:31:50 MSK. --
+      Sep 11 15:28:51 vagrant systemd[1]: Started Node Exporter.
       ```
 1. Ознакомьтесь с опциями node_exporter и выводом `/metrics` по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
    * `node_cpu_seconds_total{cpu="*",mode="user"}`
