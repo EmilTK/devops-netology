@@ -22,7 +22,7 @@
       Type=simple
       Restart=always
       EnvironmentFile=/etc/default/node_exporter
-      ExecStart=/usr/local/bin/node_exporter
+      ExecStart=/usr/local/bin/node_exporter $NODE_EXP_OPTS
 
       [Install]
       WantedBy=multi-user.target    
@@ -31,9 +31,9 @@
       `systemctl daemon-reload`
    * #### Добавление в автозагрузку ####
       `systemctl enable node_exporter.service`
-   * #### Запуск процесса ####
+   * #### Запуск службы ####
       `systemctl start node_exporter.service`
-   * #### Просмотр лога процесса ####
+   * #### Просмотр лога службы ####
       ```bash
       root@vagrant:~# systemctl status node_exporter.service
       ● node_exporter.service - Node Exporter
@@ -45,12 +45,20 @@
      CGroup: /system.slice/node_exporter.service
              └─1267 /usr/local/bin/node_exporter
       ```  
-   * #### Проверка автозагрузки процесса ####
+   * #### Проверка автозагрузки службы ####
       ```bash
       root@vagrant:~# journalctl -u node_exporter.service --since today
       -- Logs begin at Thu 2021-09-02 19:53:40 MSK, end at Sat 2021-09-11 15:31:50 MSK. --
       Sep 11 15:28:51 vagrant systemd[1]: Started Node Exporter.
       ```
+   * #### Передача дополнительных опций в службу ####
+      systemd будет подгружать переменные окружения при старте node_exporter из файла /etc/default/node_exporter,
+     а параметры запуска искать в переменной NODE_EXP_OPTS
+      
+      ```bash
+      EnvironmentFile=/etc/default/node_exporter
+      ExecStart=/usr/local/bin/node_exporter $NODE_EXP_OPTS 
+     ```
 1. Ознакомьтесь с опциями node_exporter и выводом `/metrics` по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
    * `node_cpu_seconds_total{cpu="*",mode="user"}`
    * `node_cpu_seconds_total{cpu="*",mode="system"}`
