@@ -137,16 +137,16 @@ show bgp x.x.x.x/32
    </body>
    </html> 
    ```
-![load_balancing](./screenshots/sysadm_net_8_1.png)
-![load_balancing](./screenshots/sysadm_net_8_2.png)
-![load_balancing](./screenshots/sysadm_net_8_3.png)<br>
+![load_balancing](./screenshots/sysadm_net_8_1.PNG)
+![load_balancing](./screenshots/sysadm_net_8_2.PNG)
+![load_balancing](./screenshots/sysadm_net_8_3.PNG)<br>
 
 7*. Установите bird2, настройте динамический протокол маршрутизации RIP.
    * К сожалению, пока не разобрался.
 
 8*. Установите Netbox, создайте несколько IP префиксов, используя curl проверьте работу API.
 
-![netbox](./screenshots/netbox_prefix.png)<br>
+![netbox](./screenshots/netbox_prefix.PNG)<br>
 
 ```bash
 root@vagrant:~# curl -X GET "http://192.168.50.10:8000/api/ipam/prefixes/" -H  "accept: application/json" -H  "Authorization: Token 0123456789abcdef0123456789abcdef01234567" | json_pp
