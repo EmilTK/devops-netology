@@ -68,12 +68,165 @@ show bgp x.x.x.x/32
    ```
 
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали. 
-
+![home_network](./scheme/home_network.png)
  ---
 ## Задание для самостоятельной отработки (необязательно к выполнению)
 
 6*. Установите Nginx, настройте в режиме балансировщика TCP или UDP.
+   * Установка nginx `apt update && apt install nginx`
+   * Для тестирование балансировки запустил три контейнера nginx:
+   ```bash
+    docker run -it --rm -d -p 8082:80 --name web1 -v ~/projects/netology/site1:/usr/share/nginx/html nginx
+    docker run -it --rm -d -p 8083:80 --name web2 -v ~/projects/netology/site2:/usr/share/nginx/html nginx
+    docker run -it --rm -d -p 8084:80 --name web3 -v ~/projects/netology/site3:/usr/share/nginx/html nginx
+   ```
+   * В каталогах site{1..3} находится файл `index.html` с содержимым:
+   ```html
+   <!doctype html>
+   <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <title>Nginx - load balancing 1</title>
+   </head>
+   <body>
+     <h2>Hello from Nginx container #1</h2>  <!-- Номера отличаются -->
+   </body>
+   </html> 
+   ```
+   * Добавляем в `/etc/nginx/nginx.conf` в блок `http`:
+   ```bash
+   upstream backend1 {
+     server 192.168.50.10:8082;
+     server 192.168.50.10:8083;
+     server 192.168.50.10:8084;
+   }
+   ```
+   * Проверяем:
+   ```BASH
+  root@vagrant:~# curl 192.168.15.122/
+   <!doctype html>
+   <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <title>Nginx - load balancing 2</title>
+   </head>
+   <body>
+     <h2>Hello from Nginx container #2</h2>
+   </body>
+   </html>
+   root@vagrant:~# curl 192.168.15.122/
+   <!doctype html>
+   <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <title>Nginx - load balancing 3</title>
+   </head>
+   <body>
+     <h2>Hello from Nginx container #3</h2>
+   </body>
+   </html>
+   root@vagrant:~# curl 192.168.15.122/
+   <!doctype html>
+   <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <title>Nginx - load balancing 1</title>
+   </head>
+   <body>
+     <h2>Hello from Nginx container #1</h2>
+   </body>
+   </html> 
+   ```
+![load_balancing](./screenshots/sysadm_net_8_1.png)
+![load_balancing](./screenshots/sysadm_net_8_2.png)
+![load_balancing](./screenshots/sysadm_net_8_3.png)<br>
 
 7*. Установите bird2, настройте динамический протокол маршрутизации RIP.
+   * К сожалению, пока не разобрался.
 
 8*. Установите Netbox, создайте несколько IP префиксов, используя curl проверьте работу API.
+
+![netbox](./screenshots/netbox_prefix.png)<br>
+
+```bash
+root@vagrant:~# curl -X GET "http://192.168.50.10:8000/api/ipam/prefixes/" -H  "accept: application/json" -H  "Authorization: Token 0123456789abcdef0123456789abcdef01234567" | json_pp
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1213  100  1213    0     0  17328      0 --:--:-- --:--:-- --:--:-- 17084
+{
+   "count" : 2,
+   "next" : null,
+   "previous" : null,
+   "results" : [
+      {
+         "_depth" : 0,
+         "children" : 0,
+         "created" : "2021-09-25",
+         "custom_fields" : {},
+         "description" : "",
+         "display" : "10.9.128.0/23",
+         "family" : {
+            "label" : "IPv4",
+            "value" : 4
+         },
+         "id" : 1,
+         "is_pool" : true,
+         "last_updated" : "2021-09-25T17:24:13.427694Z",
+         "mark_utilized" : false,
+         "prefix" : "10.9.128.0/23",
+         "role" : null,
+         "site" : {
+            "display" : "Ð¡Ð¾Ð»Ð½ÐµÑÐ½ÑÐ¹ Ð³Ð¾ÑÐ¾Ð´",
+            "id" : 1,
+            "name" : "Ð¡Ð¾Ð»Ð½ÐµÑÐ½ÑÐ¹ Ð³Ð¾ÑÐ¾Ð´",
+            "slug" : "sg",
+            "url" : "http://192.168.50.10:8000/api/dcim/sites/1/"
+         },
+         "status" : {
+            "label" : "Active",
+            "value" : "active"
+         },
+         "tags" : [],
+         "tenant" : null,
+         "url" : "http://192.168.50.10:8000/api/ipam/prefixes/1/",
+         "vlan" : null,
+         "vrf" : null
+      },
+      {
+         "_depth" : 0,
+         "children" : 0,
+         "created" : "2021-09-25",
+         "custom_fields" : {},
+         "description" : "",
+         "display" : "10.9.130.0/23",
+         "family" : {
+            "label" : "IPv4",
+            "value" : 4
+         },
+         "id" : 2,
+         "is_pool" : true,
+         "last_updated" : "2021-09-25T17:23:56.999316Z",
+         "mark_utilized" : false,
+         "prefix" : "10.9.130.0/23",
+         "role" : null,
+         "site" : {
+            "display" : "Ð¡Ð¾Ð»Ð½ÐµÑÐ½ÑÐ¹ Ð³Ð¾ÑÐ¾Ð´",
+            "id" : 1,
+            "name" : "Ð¡Ð¾Ð»Ð½ÐµÑÐ½ÑÐ¹ Ð³Ð¾ÑÐ¾Ð´",
+            "slug" : "sg",
+            "url" : "http://192.168.50.10:8000/api/dcim/sites/1/"
+         },
+         "status" : {
+            "label" : "Active",
+            "value" : "active"
+         },
+         "tags" : [],
+         "tenant" : null,
+         "url" : "http://192.168.50.10:8000/api/ipam/prefixes/2/",
+         "vlan" : null,
+         "vrf" : null
+      }
+   ]
+}
+
+```
