@@ -10,7 +10,7 @@
 
 3. Установите apache2, сгенерируйте самоподписанный сертификат, настройте тестовый сайт для работы по HTTPS.
 
-![apache](./screenshots/apache_openssl_2.PNG)<br>
+![apache](./screenshots/apache_openssl.PNG)<br>
 
 4. Проверьте на TLS уязвимости произвольный сайт в интернете. 
    ```bash
