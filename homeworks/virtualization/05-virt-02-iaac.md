@@ -25,6 +25,22 @@
 - Ansible
 
 *Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.*
+  * Virtualbox
+  ``` bash
+  $ VboxManage --version
+  6.1.26.r145957
+  ```
+  * Vagrant
+  ```bash
+  $ vagrant --version                                                                       ✔ 
+  Vagrant 2.2.18  
+  ```
+
+  * Ansible
+  ```bash
+  $ ansible --version
+  ansible [core 2.11.5]
+  ```
 
 ## Задача 4 (*)
 
