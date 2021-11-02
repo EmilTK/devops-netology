@@ -52,7 +52,7 @@
 docker ps
 ```
 
-[vagrant & ansible](https://github.com/EmilTK/devops-netology/homeworks/solution/vm/)
+[vagrant & ansible](https://github.com/EmilTK/devops-netology/tree/main/homeworks/solution/vm)
 ```bash
 $ vagrant ssh                     
 Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
