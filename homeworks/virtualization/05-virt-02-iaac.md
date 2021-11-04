@@ -51,3 +51,31 @@
 ```
 docker ps
 ```
+
+[vagrant & ansible](https://github.com/EmilTK/devops-netology/tree/main/homeworks/solution/vm)
+```bash
+$ vagrant ssh                     
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue 02 Nov 2021 05:44:38 PM UTC
+
+  System load:  0.1               Users logged in:          0
+  Usage of /:   3.2% of 61.31GB   IPv4 address for docker0: 172.17.0.1
+  Memory usage: 21%               IPv4 address for eth0:    10.0.2.15
+  Swap usage:   0%                IPv4 address for eth1:    192.168.192.11
+  Processes:    105
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Tue Nov  2 17:43:54 2021 from 10.0.2.2
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@server1:~$ 
+```
+
+
