@@ -110,6 +110,7 @@ mysql> show table status;
 
 Измените `engine` и **приведите время выполнения и запрос на изменения из профайлера в ответе**:
 - на `MyISAM`
+<<<<<<< HEAD
 - на `InnoDB`
 
 ```bash
@@ -124,6 +125,19 @@ mysql> SHOW PROFILES;
 +----------+------------+----------------------------------------------------------------+
 ```
 
+=======
+```bash
+mysql> ALTER TABLE orders ENGINE=MyISAM;
+Query OK, 5 rows affected (0.08 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+```
+- на `InnoDB`
+```bash
+mysql> ALTER TABLE orders ENGINE=InnoDB;
+Query OK, 5 rows affected (0.12 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+```
+>>>>>>> 2a7d6c1f7fe4f29788e6a683a44d32166351bc5d
 ## Задача 4
 
 Изучите файл `my.cnf` в директории /etc/mysql.
@@ -137,6 +151,7 @@ mysql> SHOW PROFILES;
 
 Приведите в ответе измененный файл `my.cnf`.
 
+<<<<<<< HEAD
 ```bash
 #Скорость IO важнее сохранности данных
 innodb_flush_log_at_trx_commit = 2
@@ -149,3 +164,12 @@ innodb_buffer_pool_size = 1024М
 ##Размер файла логов операций 100 Мб
 innodb_log_file_size = 100M
 ```
+=======
+---
+
+### Как оформить ДЗ?
+
+Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
+
+---
+>>>>>>> 2a7d6c1f7fe4f29788e6a683a44d32166351bc5d
