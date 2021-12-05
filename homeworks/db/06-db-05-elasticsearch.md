@@ -20,7 +20,7 @@
 
 В ответе приведите:
 - текст Dockerfile манифеста
-  * [Dockerfile](/src/05-elasticsearch/Dockerfile)
+  * [Dockerfile](https://github.com/EmilTK/devops-netology/blob/main/homeworks/db/src/05-elasticsearch/Dockerfile)
 - ссылку на образ в репозитории dockerhub
   * https://hub.docker.com/repository/docker/emiltk/netology
   * `docker pull emiltk/netology:elastic`
