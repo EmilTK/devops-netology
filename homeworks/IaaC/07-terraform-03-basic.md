@@ -27,7 +27,8 @@ dynamodb.
 1. При желании поэкспериментируйте с другими параметрами и рессурсами.
 
 В виде результата работы пришлите:
-* Вывод команды `terraform workspace list`.
+* Вывод команды `terraform workspace list`.<br>
+
 ![Terraform_workspace](../screenshots/terraform_workspace.PNG)
 * Вывод команды `terraform plan` для воркспейса `prod`.
   * [Terraform plan](../../terraform/07-terraform-03-basic/terraform_plan_prod.md)
