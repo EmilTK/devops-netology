@@ -1,0 +1,25 @@
+---
+repos:
+- id: https://gitlab.com/emiltk92/devops-netology
+  branch: /.*/
+  allowed_overrides: [workflow]
+  workflow: default
+  apply_requirements: [approved, mergeable]
+  allow_custom_workflows: true
+  delete_source_branch_on_merge: true
+
+workflows:
+  default:
+    plan:
+      steps:
+      - run echo plan started
+      - init
+      - plan:
+          extra_args: ["-lock=false"]
+      - run echo plan finished
+    apply:
+      steps:
+      - run echo apply started
+      - apply
+      - run echo apply finished
+---

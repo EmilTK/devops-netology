@@ -1,0 +1,43 @@
+provider "aws" {
+  region = "eu-central-1"
+}
+
+locals {
+web_instance_count_map = {
+stage = 1
+prod = 2
+}
+}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners   = ["099720109477"]
+}
+
+data "aws_region" "current" {}
+
+data "aws_caller_identity" "current" {}
+
+
+module "ec2_instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 3.0"
+  name = "each-instance"
+
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = each.value.instance_type
+  for_each      = var.instances
+
+  tags = {
+    Name   = each.value.name
+    Lesson = "07-04"
+  }
+}
