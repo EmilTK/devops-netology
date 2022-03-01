@@ -29,5 +29,12 @@
 
   * Согласно заданию создал два Workflow:
     1. [Bug workflow](netology_bug.xml)
+
+      ![Bug workflow](bug_workflow.png)
+
     2. [Other task workflow](netology_other.xml)
+    
+      ![Other task workflow](other_task_workflow.png)
+
+
 ---
