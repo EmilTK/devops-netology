@@ -1,0 +1,17 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+# Эта роль позволяет "netology" читать модули в пространстве "app-namespace"
+# У вас должна быть роль с именем  "pod-reader" в этом пространствe.
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: app-namespace
+subjects:
+- kind: ServiceAccount
+  name: netology
+  namespace: app-namespace
+roleRef:
+  # "roleRef" Указывает привязку к роли или ClasterRole
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
