@@ -145,7 +145,8 @@ hello-world-5c6748dcbc-l45mg   1/1     Running   0          94s
 
 ## Полезный мариал:
 https://kubernetes.io/docs/reference/access-authn-authz/rbac/  
-https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/#apply  
+https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/#apply
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 https://www.ibm.com/docs/en/cloud-paks/cp-management/2.0.0?topic=kubectl-using-service-account-tokens-connect-api-server
 
 ---
