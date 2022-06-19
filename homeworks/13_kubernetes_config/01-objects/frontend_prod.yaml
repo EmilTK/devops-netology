@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         env:
           - name: BASE_URL
-            value: http://backend:9000
+            value: http://backend-service:9000
 
 ---
 apiVersion: v1
