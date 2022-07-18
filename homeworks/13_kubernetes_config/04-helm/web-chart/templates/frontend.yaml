@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.frontend_name }}-{{ .Values.release }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.frontend_name }}-{{ .Values.release }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.frontend_name }}-{{ .Values.release }}
+    spec:
+      containers:
+      - image: {{ .Values.frontend_image}}:{{ .Values.frontend_image_tag }}
+        name: {{ .Values.frontend_name }}-{{ .Values.release }}
+        ports:
+        - containerPort: {{ .Values.frontend_port }}
+        env:
+          - name: BASE_URL
+            value: http://backend-service:9000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service-{{ .Values.release }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.frontend_name }}-{{ .Values.release }}
+  ports:
+    - port: 8000
+      targetPort: {{ .Values.frontend_port }}
+      protocol: TCP

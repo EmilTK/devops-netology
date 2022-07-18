@@ -1,0 +1,19 @@
+release: 1
+namespace: production
+replicaCount: 2
+
+backend_name: backend
+backend_port: 9000
+backend_image: emiltk/kubernetes-config_backend
+backend_image_tag: latest
+
+frontend_name: frontend
+frontend_port: 80
+frontend_image: emiltk/kubernetes-config_frontend
+frontend_image_tag : latest
+
+postgres_name: postgres
+postgres_replicaCount: 1
+postgres_port: 5432
+postgres_image: postgres
+postgres_image_tag: 13-alpine

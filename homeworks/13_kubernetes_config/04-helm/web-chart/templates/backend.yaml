@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.backend_name }}-{{ .Values.release }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.backend_name }}-{{ .Values.release }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend_name }}-{{ .Values.release }}
+    spec:
+      containers:
+        - image: {{ .Values.backend_image}}:{{ .Values.backend_image_tag }}
+          name: {{ .Values.backend_name }}-{{ .Values.release }}
+          ports:
+            - containerPort: {{ .Values.backend_port }}
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@postgres-service:5432/news
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service-{{ .Values.release }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Values.backend_name }}-{{ .Values.release }}
+  ports:
+    - port: {{ .Values.backend_port }}
+      targetPort: {{ .Values.backend_port }}
+      protocol: TCP
