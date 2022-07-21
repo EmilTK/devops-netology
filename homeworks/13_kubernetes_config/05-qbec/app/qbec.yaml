@@ -1,0 +1,21 @@
+apiVersion: qbec.io/v1alpha1
+kind: App
+metadata:
+  name: WebService
+spec:
+  environments:
+    default:
+      defaultNamespace: default
+      server: https://51.250.83.72:6443
+    stage:
+      defaultNamespace: stage
+      server: https://51.250.83.72:6443
+    prod:
+      defaultNamespace: prod
+      server: https://51.250.83.72:6443
+      includes:
+        - endpoint
+  vars: {}
+  excludes:
+    - services
+    - ingress
