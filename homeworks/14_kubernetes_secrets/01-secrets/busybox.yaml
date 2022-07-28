@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: netology
+spec:
+  containers:
+  - image: busybox
+    name: busybox
+    args: 
+    - sleep
+    - "600"
+    env:
+    - name: myusername
+      valueFrom:
+        secretKeyRef:
+          name: emil
+          key: username
+    volumeMounts:
+    - name: secret-vol
+      mountPath: "/etc/secret"
+      readOnly: true
+  volumes:
+  - name: secret-vol
+    secret:
+      secretName: Netology
+      optional: false
