@@ -1,0 +1,48 @@
+apiVersion: v1
+data:
+  nginx.yaml: |
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      selector:
+        app: nginx
+      ports:
+      - port: 80
+        protocol: TCP
+        targetPort: 80
+      type: ClusterIP
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      replicas: 3
+      selector:
+        matchLabels:
+          app: nginx
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:latest
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 80
+              protocol: TCP
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-08-04T17:54:27Z"
+  name: nginx-config
+  namespace: default
+  resourceVersion: "2308"
+  uid: 6495e3b4-f753-4ec7-97bb-2cfcdfb245ac

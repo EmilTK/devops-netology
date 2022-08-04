@@ -1,0 +1,54 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "data": {
+                "name": "netology.ru"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2022-08-04T17:55:05Z",
+                "name": "domain",
+                "namespace": "default",
+                "resourceVersion": "2375",
+                "uid": "0096a138-4c95-4ed9-b37a-7e80359df602"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "ca.crt": "-----BEGIN CERTIFICATE-----\nMIIC/jCCAeagAwIBAgIBADANBgkqhkiG9w0BAQsFADAVMRMwEQYDVQQDEwprdWJl\ncm5ldGVzMB4XDTIyMDgwNDE3NDEyMloXDTMyMDgwMTE3NDEyMlowFTETMBEGA1UE\nAxMKa3ViZXJuZXRlczCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOT8\nTTeMxg3oQIKMPr2FQfhzv4b5vicHgBCrvvu4/qdwKpsJLpBmftem2UFuUTv+qkce\nym5k+EII6mBByHwMhXNgExKOuZAI97WS6l75Hx49L09D6ZPRniSDrGZfnPbMxeSl\nrx3ApRkDK5mTA/io6ki3OhUiy3N2YpFXm/PgtImbghPqkaaB11WteQIlGkJIlg9r\nzzhOsIrjzw2xgVlN8/dLSmqNysUOoiRKrIvQR6awnx2Z21pblFgQ7+3So8oeO58Y\nj9L9/0wvIS6Uukyy7EFVINwSkwt/VgD2OcmNduKvpc17xDtnQvok5aLdNHvmJtHR\n0/k5XXIAJJQx3QHi6v0CAwEAAaNZMFcwDgYDVR0PAQH/BAQDAgKkMA8GA1UdEwEB\n/wQFMAMBAf8wHQYDVR0OBBYEFG0E6Kdj0eNa1HDR9i+avp4snmyaMBUGA1UdEQQO\nMAyCCmt1YmVybmV0ZXMwDQYJKoZIhvcNAQELBQADggEBAMCjRaB+KRYeDrFv96+L\nIE5DkRzCWDqMBbwYrmmFcUSynbzoeSeGU532umBb9nav0UVQ7BLTjhzX2BuOKpA3\nv+utkk5t8dOJrKH4+CWfjahmm8N6CeC6B0mlHSoatJkuMLpqx2czYghvoZ6JImhd\nQRxNrIi9IUGxBgJ9kW8tl2xBaeGj70SyS+JABurR+rQQdya0mvakxWIDL+TuAo3t\ntWzCpEIDGClyFtp3iHd26DJTIxkPW5RHsHom/osEEyG5WLujYszoUP3809qvzD9v\njZXC1sbzSrytMGxHBbvNwx8+jOtpreteuZFpxfPqYBSIPRAlwNHQAgtzL0JuGopQ\nAYs=\n-----END CERTIFICATE-----\n"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/description": "Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubernetes.default.svc. No other usage is guaranteed across distributions of Kubernetes clusters."
+                },
+                "creationTimestamp": "2022-08-04T17:42:04Z",
+                "name": "kube-root-ca.crt",
+                "namespace": "default",
+                "resourceVersion": "391",
+                "uid": "7fc2888b-ff1b-4614-8fe3-3b849e3f3d8f"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "data": {
+                "nginx.yaml": "kind: Service\napiVersion: v1\nmetadata:\n  name: nginx\n  labels:\n    app: nginx\nspec:\n  selector:\n    app: nginx\n  ports:\n  - port: 80\n    protocol: TCP\n    targetPort: 80\n  type: ClusterIP\n---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx\n  labels:\n    app: nginx\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n      - name: nginx\n        image: nginx:latest\n        imagePullPolicy: Always\n        ports:\n        - containerPort: 80\n          protocol: TCP\n"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "creationTimestamp": "2022-08-04T17:54:27Z",
+                "name": "nginx-config",
+                "namespace": "default",
+                "resourceVersion": "2308",
+                "uid": "6495e3b4-f753-4ec7-97bb-2cfcdfb245ac"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
