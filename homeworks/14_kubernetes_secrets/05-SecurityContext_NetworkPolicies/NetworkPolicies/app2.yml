@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app2
+  namespace: netology-np-demo
+  labels:
+    role: app2
+spec:
+  containers:
+    - image: wbitt/network-multitool
+      name: app2

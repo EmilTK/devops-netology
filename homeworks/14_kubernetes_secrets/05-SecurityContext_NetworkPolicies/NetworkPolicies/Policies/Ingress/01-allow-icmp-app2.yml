@@ -1,0 +1,17 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: access-icmp-from-app1
+  namespace: netology-np-demo
+spec:
+  podSelector:
+    matchLabels:
+      role: app2
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: app1
