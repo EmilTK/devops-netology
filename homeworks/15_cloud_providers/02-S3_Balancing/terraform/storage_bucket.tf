@@ -1,5 +1,6 @@
 locals {
   # current_date = formatdate("DD.MM.YY",timestamp())
+  # bucket_name = "emil.temerbulatov-${current_date}"
   bucket_name = "emil.temerbulatov"
   file        =  "../files/vombat.jpg"
 }
