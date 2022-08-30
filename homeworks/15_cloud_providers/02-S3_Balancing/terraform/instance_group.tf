@@ -1,3 +1,19 @@
+resource "yandex_iam_service_account" "ig-sa" {
+  name        = "ig-sa"
+  description = "service account to manage IG"
+}
+
+resource "yandex_resourcemanager_folder_iam_binding" "ig-sa-editor" {
+  folder_id = "${data.yandex_resourcemanager_folder.netology.id}"
+  role      = "editor"
+  members   = [
+    "serviceAccount:${yandex_iam_service_account.ig-sa.id}"
+  ]
+  depends_on = [
+    yandex_iam_service_account.ig-sa,
+  ]
+}
+
 resource "yandex_compute_instance_group" "lamp-group" {
   name                = "lamp-group"
   folder_id           = "${data.yandex_resourcemanager_folder.netology.id}"
