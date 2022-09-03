@@ -1,7 +1,6 @@
 locals {
-  # current_date = formatdate("DD.MM.YY",timestamp())
-  # bucket_name = "emil.temerbulatov-${current_date}"
-  bucket_name = "emil.temerbulatov"
+  current_date = formatdate("DD.MM.YY",timestamp())
+  bucket_name = "emil.temerbulatov-${local.current_date}"
   file        =  "../files/vombat.jpg"
 }
 
@@ -39,15 +38,15 @@ resource "yandex_storage_object" "vombat" {
   acl        = "public-read"
 }
 
-# data "template_file" "index" {
-#   template = "${file("templates/index.tpl")}"
-#     vars = {
-#       bucket    = local.bucket_name
-#       file_name = basename(local.file)
-#     }
-# }
+data "template_file" "index" {
+  template = "${file("templates/index.tpl")}"
+    vars = {
+      bucket    = local.bucket_name
+      file_name = basename(local.file)
+    }
+}
 
-# resource "local_file" "index" {
-#   content  = "${data.template_file.index.rendered}"
-#   filename = "./index.yaml"
-# }
+resource "local_file" "index" {
+  content  = "${data.template_file.index.rendered}"
+  filename = "./index.yaml"
+}

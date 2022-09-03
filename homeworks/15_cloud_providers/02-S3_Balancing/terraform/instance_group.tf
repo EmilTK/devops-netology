@@ -18,7 +18,7 @@ resource "yandex_compute_instance_group" "lamp-group" {
   name                = "lamp-group"
   folder_id           = "${data.yandex_resourcemanager_folder.netology.id}"
   service_account_id  = "${yandex_iam_service_account.ig-sa.id}"
-  depends_on          = [yandex_resourcemanager_folder_iam_binding.ig-sa-editor]
+  depends_on          = [yandex_resourcemanager_folder_iam_binding.ig-sa-editor, local_file.index]
   instance_template {
     platform_id = "standard-v1"
     name        = "lamp-{instance.index}"
@@ -39,8 +39,8 @@ resource "yandex_compute_instance_group" "lamp-group" {
     }
 
     metadata = {
-      # user-data      = file(local_file.index.filename)
-      user-data      = file("./index.yaml")
+      user-data      = file(local_file.index.filename)
+      # user-data      = file("./index.yaml")
       ssh-keys       = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
     }
     network_settings {
