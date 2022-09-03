@@ -3,7 +3,7 @@ resource "yandex_mdb_mysql_cluster" "netology-mysql" {
   environment = "PRESTABLE"
   network_id  = yandex_vpc_network.default.id
   version     = "8.0"
-#   deletion_protection = "true"
+  deletion_protection = "true"
 
   resources {
     resource_preset_id = "b1.medium"
